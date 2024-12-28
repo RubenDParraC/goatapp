@@ -12,6 +12,7 @@ const DynamicHeader = ({
   subtitle,
   description,
   image,
+  isOpacityPercentInitial = 0.5,
 }: DynamicHeaderProps) => {
   const Scroll_Distance = HeaderMaxHeight - HeaderMinHeight;
 
@@ -43,7 +44,7 @@ const DynamicHeader = ({
 
   const animatedHeaderOpacity = value.interpolate({
     inputRange: [0, Scroll_Distance],
-    outputRange: [0.5, 0.9],
+    outputRange: [isOpacityPercentInitial, 0.9],
     extrapolate: "clamp",
   });
 
@@ -71,26 +72,30 @@ const DynamicHeader = ({
           }}
         />
         <View className="w-full h-full flex items-center justify-center gap-2 z-10 absolute p-5 pt-10">
-          <Animated.Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={{ fontSize: animatedHeaderTitle }}
-            className="font-bold text-white text-center "
-          >
-            {title}
-          </Animated.Text>
+          {title ? (
+            <Animated.Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={{ fontSize: animatedHeaderTitle }}
+              className="font-bold text-white text-center "
+            >
+              {title}
+            </Animated.Text>
+          ) : null}
           {subtitle ? (
             <Text numberOfLines={2} className="font-bold text-base text-white">
               {subtitle}
             </Text>
           ) : null}
-          <Text
-            numberOfLines={numberOfLines}
-            ellipsizeMode="tail"
-            className="font-light text-md text-white text-center"
-          >
-            {description}
-          </Text>
+          {description ? (
+            <Text
+              numberOfLines={numberOfLines}
+              ellipsizeMode="tail"
+              className="font-light text-md text-white text-center"
+            >
+              {description}
+            </Text>
+          ) : null}
         </View>
       </ImageBackground>
     </Animated.View>

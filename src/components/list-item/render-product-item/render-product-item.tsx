@@ -3,6 +3,7 @@ import type { RenderProductItemProps } from "./types";
 import Product from "../../product/product";
 
 const RenderProductItem = ({
+  index,
   item,
   isHorizontal,
   onClick,
@@ -11,6 +12,7 @@ const RenderProductItem = ({
   const { id } = item;
   return (
     <Product
+      index={index}
       item={item}
       onClick={onClick}
       onClickCartShop={onClickCartShop}

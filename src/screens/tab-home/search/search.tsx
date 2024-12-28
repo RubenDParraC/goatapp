@@ -71,12 +71,18 @@ export default function Search() {
       </TouchableOpacity>
       <FlatList
         data={storeData}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <RenderStoreItem
+            index={index}
             item={item}
             onClickStore={() =>
               navigation.navigate("StoreDetails", {
                 storeID: item.id.toString(),
+              })
+            }
+            onClickProduct={(productID) =>
+              navigation.navigate("ProductDetails", {
+                productID: productID.toString(),
               })
             }
           />

@@ -19,8 +19,9 @@ const HeaderComponent = React.memo(
         <FlatList
           horizontal
           data={subcategories}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <RenderSubcategoryItem
+              index={index}
               item={item}
               onClick={() => handleSubcategoryChange(item)}
             />

@@ -4,11 +4,15 @@ import { ConstantClass } from "../../statics/config";
 import Avatar from "../avatar/avatar";
 import IconComponent from "../icon-component/icon-component";
 import type { SubcategorieProps } from "./types";
+import Animated, { FadeInRight } from "react-native-reanimated";
 
-const Subcategorie = ({ item, onClick }: SubcategorieProps) => {
+const Subcategorie = ({ index = 1, item, onClick }: SubcategorieProps) => {
   const { title, image } = item;
   return (
-    <View className="w-40 flex flex-col items-center gap-2 bg-white rounded-xl min-w-28 max-w-40 max-h-20 mr-3">
+    <Animated.View
+      entering={FadeInRight.delay(500).duration((index + 1) * 500)}
+      className="w-40 flex flex-col items-center gap-2 bg-white rounded-xl min-w-28 max-w-40 max-h-20 mr-3"
+    >
       <ImageBackground
         source={{ uri: `${ConstantClass.webserviceName}${image}` }}
         className="w-full h-full rounded-xl overflow-hidden bg-gray"
@@ -28,7 +32,7 @@ const Subcategorie = ({ item, onClick }: SubcategorieProps) => {
           </Text>
         </TouchableOpacity>
       </ImageBackground>
-    </View>
+    </Animated.View>
   );
 };
 

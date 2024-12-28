@@ -15,8 +15,9 @@ const HeaderComponent = ({ categories }: HeaderComponentProps) => {
       <FlatList
         horizontal
         data={categories}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <RenderCategoryItem
+            index={index}
             item={item}
             onClick={() => navigation.navigate("Search", { category: item })}
           />

@@ -35,6 +35,7 @@ export default function Register() {
     firstName,
     lastName,
     email,
+    phone,
     password,
     confirmPassword,
   }: ValuesType) => {
@@ -43,6 +44,7 @@ export default function Register() {
       firstName,
       lastName,
       email,
+      phone,
       password,
       confirmPassword,
       setIsLoading,
@@ -89,6 +91,7 @@ export default function Register() {
           firstName: "",
           lastName: "",
           email: "",
+          phone: "",
           password: "",
           confirmPassword: "",
         }}
@@ -205,6 +208,26 @@ export default function Register() {
                         name="email"
                         color={
                           touched.email && errors.email ? "error" : "gray_hard"
+                        }
+                      />
+                    }
+                  />
+                  <Input
+                    label="Teléfono"
+                    placeholder="3132335689"
+                    value={values.phone}
+                    onChangeText={handleChange("phone")}
+                    onBlur={() => setFieldTouched("phone")}
+                    autoCapitalize="none"
+                    keyboardType="phone-pad"
+                    error={touched.phone && errors.phone ? errors.phone : ""}
+                    hideSeparator
+                    icon={
+                      <IconComponent
+                        icon="MaterialIcons"
+                        name="phone-iphone"
+                        color={
+                          touched.phone && errors.phone ? "error" : "gray_hard"
                         }
                       />
                     }

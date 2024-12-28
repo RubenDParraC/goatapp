@@ -5,6 +5,7 @@ import type {
   CategoriesMethodProps,
   FeaturedStoreMethodProps,
   LoginMethodProps,
+  ProductDetailsMethodProps,
   RegisterMethodProps,
   SearchByCategoryMethodProps,
   SearchBySubcategoryMethodProps,
@@ -15,6 +16,7 @@ import type {
 } from "./types";
 import {
   ParseCategoriesData,
+  ParseProductData,
   ParseStoreData,
   ParseStoresData,
   ParseSubCategoriesData,
@@ -58,6 +60,7 @@ export const registerRequest = async ({
   firstName,
   lastName,
   email,
+  phone,
   password,
   confirmPassword,
   setIsLoading,
@@ -69,6 +72,9 @@ export const registerRequest = async ({
       credentials: "omit",
       method: "POST",
       body: {
+        customer: {
+          phone,
+        },
         email,
         password,
         repeat_password: confirmPassword,
@@ -300,6 +306,32 @@ export const storeDetailsRequest = async ({
     }
   } catch (error) {
     setLoadingStoreData(false);
+    console.log(error);
+  }
+};
+
+export const productDetailsRequest = async ({
+  productID,
+  setProductData,
+  setLoadingProductData,
+}: ProductDetailsMethodProps) => {
+  try {
+    const data: ApiRequestData = {
+      method: "GET",
+      token: (await AsyncStorage.getItem("userToken")) ?? "",
+    };
+    const response = await asyncSendApis(
+      `${Paths.product_details}${productID}`,
+      data
+    );
+    if (response.status) {
+      setProductData(ParseProductData(response));
+      setLoadingProductData(false);
+    } else {
+      setLoadingProductData(false);
+    }
+  } catch (error) {
+    setLoadingProductData(false);
     console.log(error);
   }
 };

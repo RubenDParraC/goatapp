@@ -53,12 +53,18 @@ export default function Home() {
       <View className="px-5">
         <FlatList
           data={featuredStore}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <RenderStoreItem
+              index={index}
               item={item}
               onClickStore={() =>
                 navigation.navigate("StoreDetails", {
                   storeID: item.id.toString(),
+                })
+              }
+              onClickProduct={(productID) =>
+                navigation.navigate("ProductDetails", {
+                  productID: productID.toString(),
                 })
               }
             />

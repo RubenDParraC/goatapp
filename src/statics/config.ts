@@ -13,4 +13,5 @@ export const Paths = {
   search_suggestions: "/catalogs/api_suggestion_search?search=",
   search_by_suggestions: "/catalogs/api_find_product_store?search=",
   store_details: "/catalogs/api_detail_product_store/",
+  product_details: "/catalogs/api_detail_product/",
 } as const;

@@ -10,12 +10,21 @@ import { ConstantClass } from "../../../statics/config";
 import Separator from "../../separator/separator";
 import type { RenderStoreItemProps } from "./types";
 import RenderProductItem from "../render-product-item/render-product-item";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
-const RenderStoreItem = ({ item, onClickStore }: RenderStoreItemProps) => {
+const RenderStoreItem = ({
+  index = 1,
+  item,
+  onClickStore,
+  onClickProduct,
+}: RenderStoreItemProps) => {
   const { name, description, image, products } = item;
 
   return (
-    <View className="flex flex-col bg-white p-5 mb-5 rounded-xl">
+    <Animated.View
+      entering={FadeInDown.delay(500).duration((index + 1) * 500)}
+      className="flex flex-col bg-white p-5 mb-5 rounded-xl"
+    >
       <ImageBackground
         source={{ uri: `${ConstantClass.webserviceName}${image}` }}
         className="w-full h-28 rounded-xl overflow-hidden bg-gray"
@@ -48,18 +57,19 @@ const RenderStoreItem = ({ item, onClickStore }: RenderStoreItemProps) => {
         data={products}
         keyExtractor={(item) => `store${+item.id}`}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <RenderProductItem
+            index={index}
             item={item}
             isHorizontal
-            onClick={() => console.log("Product ID: ", item.id)}
+            onClick={() => onClickProduct(item.id)}
             onClickCartShop={() =>
               console.log("Product cartshop ID: ", item.id)
             }
           />
         )}
       />
-    </View>
+    </Animated.View>
   );
 };
 

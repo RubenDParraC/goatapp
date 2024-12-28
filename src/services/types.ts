@@ -1,5 +1,6 @@
 import type {
   CategoriesType,
+  ProductType,
   StoreType,
   SubCategoriesType,
   SuggestionStoreType,
@@ -18,6 +19,7 @@ export type RegisterMethodProps = {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
   password: string;
   confirmPassword: string;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -81,4 +83,10 @@ export type StoreDetailsMethodProps = {
   storeID: string;
   setStoreData: React.Dispatch<React.SetStateAction<StoreType | undefined>>;
   setLoadingStoreData: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type ProductDetailsMethodProps = {
+  productID: string;
+  setProductData: React.Dispatch<React.SetStateAction<ProductType | undefined>>;
+  setLoadingProductData: React.Dispatch<React.SetStateAction<boolean>>;
 };

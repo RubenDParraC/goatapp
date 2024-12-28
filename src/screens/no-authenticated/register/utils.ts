@@ -10,6 +10,9 @@ export const RegisterSchema = Yup.object().shape({
   email: Yup.string()
     .email("Correo no valido")
     .required("El correo electrónico es obligatorio."),
+  phone: Yup.string()
+    .matches(/^\d{10}$/, "El número de teléfono debe tener 10 dígitos.")
+    .required("El número de teléfono es obligatorio."),
   password: Yup.string()
     .min(8, "La contraseña debe tener minimo 8 caracteres.")
     .max(50, "La contraseña debe tener máximo 50 caracteres.")

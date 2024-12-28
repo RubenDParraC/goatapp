@@ -117,3 +117,24 @@ export function ParseSuggestionsStoresData(
   );
   return suggestions;
 }
+
+export function ParseProductData({
+  id,
+  name,
+  description,
+  image,
+  price,
+  quantity,
+  percentage_discount,
+}: ApiResponse): ProductType {
+  return {
+    id,
+    name,
+    description,
+    image: image || null,
+    price,
+    quantity,
+    rank: 0,
+    percentage_discount: percentage_discount || "0",
+  };
+}

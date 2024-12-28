@@ -5,8 +5,9 @@ export type DynamicHeaderProps = {
   HeaderMaxHeight: number;
   HeaderMinHeight: number;
   HeaderMaxlengthDescription: number;
-  title: string;
+  title?: string;
   subtitle?: string;
-  description: string;
+  description?: string;
   image?: string;
+  isOpacityPercentInitial?: number;
 };

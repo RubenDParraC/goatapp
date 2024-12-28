@@ -42,8 +42,9 @@ export default function StoreDetails() {
           data={storeData?.products}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <RenderProductItem
+              index={index}
               item={item}
               onClick={() => console.log("Product ID: ", item.id)}
               onClickCartShop={() =>

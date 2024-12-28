@@ -14,6 +14,7 @@ export type ProductType = {
   price: string | number;
   quantity: number;
   rank: number;
+  percentage_discount?: string;
 };
 
 export type StoreType = {

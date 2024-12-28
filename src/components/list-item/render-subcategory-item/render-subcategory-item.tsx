@@ -3,10 +3,11 @@ import type { RenderSubcategoryItemProps } from "./types";
 import Subcategorie from "../../subcategorie/subcategorie";
 
 const RenderSubcategoryItem = ({
+  index,
   item,
   onClick,
 }: RenderSubcategoryItemProps) => {
-  return <Subcategorie item={item} onClick={onClick} />;
+  return <Subcategorie index={index} item={item} onClick={onClick} />;
 };
 
 export default RenderSubcategoryItem;

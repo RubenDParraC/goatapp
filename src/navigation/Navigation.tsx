@@ -8,7 +8,7 @@ import OrderList from "../screens/tab-profile/order-list";
 import ProfileHome from "../screens/tab-profile/profile-home";
 import CartShop from "../screens/tab-cartshop/cart-shop";
 import StoreDetails from "../screens/tab-home/store-details/store-details";
-import ProductDetails from "../screens/tab-home/product-details";
+import ProductDetails from "../screens/tab-home/product-details/product-details";
 import Search from "../screens/tab-home/search/search";
 import LocationDetails from "../screens/tab-profile/location-details";
 import OnBoarding from "../screens/no-authenticated/on-boarding/on-boarding";

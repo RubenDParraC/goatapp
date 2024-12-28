@@ -8,7 +8,7 @@ export type RootStackParamList = {
   Search: { category: CategoriesType };
   SearchText: undefined;
   Categories: undefined;
-  ProductDetails: undefined;
+  ProductDetails: { productID: string };
   StoreDetails: { storeID: string };
   ProfileHome: undefined;
   LocationDetails: undefined;

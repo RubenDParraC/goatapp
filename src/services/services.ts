@@ -90,9 +90,12 @@ export const asyncSendApis = async (
     // Detectar si fue un error por cancelación
     if (error.name === "AbortError") {
       console.log("Request canceled by user");
-    } else {
-      console.error("Fetch error: ", error);
     }
+    // if (error.name === "AbortError") {
+    //   console.log("Request canceled by user");
+    // } else {
+    //   console.error("Fetch error: ", error);
+    // }
     throw error; // Volvemos a lanzar el error para manejo superior si es necesario
   }
 };
