@@ -3,7 +3,7 @@ import React from "react";
 import type { SuggestionStoreTypeProps } from "./types";
 
 const SuggestionStore = ({ item, onClick }: SuggestionStoreTypeProps) => {
-  const { name, user_id } = item;
+  const { name, id } = item;
 
   return (
     <TouchableOpacity

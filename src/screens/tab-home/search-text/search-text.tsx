@@ -109,7 +109,7 @@ const SearchText = () => {
           <RenderSuggestionItem
             item={item}
             onClick={async () => {
-              console.log("suggestion ID:", item);
+              console.log(item);
               await searchStoresBySuggestionRequest({
                 suggestion: item.name,
                 setStoreData,
@@ -139,16 +139,25 @@ const SearchText = () => {
         <View className="w-full flex-1">
           <FlatList
             data={storeData}
-            renderItem={({ item }) => (
-              <RenderStoreItem
-                item={item}
-                onClickStore={() =>
-                  navigation.navigate("StoreDetails", {
-                    storeID: item.id.toString(),
-                  })
-                }
-              />
-            )}
+            renderItem={({ item, index }) => {
+              console.log(item);
+              return (
+                <RenderStoreItem
+                  index={index}
+                  item={item}
+                  onClickStore={() =>
+                    navigation.navigate("StoreDetails", {
+                      storeID: item.id.toString(),
+                    })
+                  }
+                  onClickProduct={(productID) =>
+                    navigation.navigate("ProductDetails", {
+                      productID: productID.toString(),
+                    })
+                  }
+                />
+              );
+            }}
             keyExtractor={(item) => `store-${+item.id}`}
           />
         </View>

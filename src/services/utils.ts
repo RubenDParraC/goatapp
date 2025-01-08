@@ -1,5 +1,6 @@
 import type {
   CategoriesType,
+  LocationType,
   ProductType,
   StoreType,
   SubCategoriesType,
@@ -110,9 +111,9 @@ export function ParseSuggestionsStoresData(
   data: ApiResponse
 ): SuggestionStoreType[] {
   const suggestions: SuggestionStoreType[] = data.map(
-    ({ name, user_id }: SuggestionStoreType) => ({
+    ({ name, id }: SuggestionStoreType) => ({
       name,
-      user_id,
+      id,
     })
   );
   return suggestions;
@@ -137,4 +138,29 @@ export function ParseProductData({
     rank: 0,
     percentage_discount: percentage_discount || "0",
   };
+}
+
+export function ParseLocationsData(data: ApiResponse): LocationType[] {
+  const locations: LocationType[] = data.map(
+    ({
+      id,
+      name,
+      ak,
+      address,
+      description,
+      user,
+      city,
+      state,
+    }: LocationType) => ({
+      id,
+      name,
+      ak,
+      address,
+      description,
+      user,
+      city,
+      state,
+    })
+  );
+  return locations;
 }

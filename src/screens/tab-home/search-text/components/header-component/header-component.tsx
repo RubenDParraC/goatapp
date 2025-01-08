@@ -19,13 +19,14 @@ const HeaderComponent = ({
           <RenderSuggestionStoreItem
             item={item}
             onClick={() =>
+              item.id &&
               navigation.navigate("StoreDetails", {
-                storeID: item.user_id.toString(),
+                storeID: item.id.toString(),
               })
             }
           />
         )}
-        keyExtractor={(item) => `suggestion-store-${+item.user_id}`}
+        keyExtractor={(_, index) => `suggestion-store-${+index}`}
         showsHorizontalScrollIndicator={false}
       />
       {visibleSeparator ? (

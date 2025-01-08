@@ -40,6 +40,17 @@ export type SuggestionType = {
 };
 
 export type SuggestionStoreType = {
-  user_id: string | number;
+  id: string | number;
   name: string;
+};
+
+export type LocationType = {
+  id: string | number;
+  name: string;
+  ak: string;
+  address: string;
+  description: string;
+  user: number;
+  city: number;
+  state: number;
 };

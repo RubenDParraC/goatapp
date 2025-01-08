@@ -1,5 +1,6 @@
 import type {
   CategoriesType,
+  LocationType,
   ProductType,
   StoreType,
   SubCategoriesType,
@@ -89,4 +90,29 @@ export type ProductDetailsMethodProps = {
   productID: string;
   setProductData: React.Dispatch<React.SetStateAction<ProductType | undefined>>;
   setLoadingProductData: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type LocationsMethodProps = {
+  setLocations: React.Dispatch<
+    React.SetStateAction<LocationType[] | undefined>
+  >;
+  setLoadingLocations: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type LocationDeleteMethodProps = {
+  locationID: string;
+  setLoadingDeleteLocation: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type LocationCreateMethodProps = {
+  name: string;
+  address: string;
+  description: string;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsError: React.Dispatch<React.SetStateAction<string>>;
+  onNavigation: () => void;
+};
+
+export type LocationUpdateMethodProps = LocationCreateMethodProps & {
+  id: string;
 };
