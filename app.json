@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "goatapp",
-    "slug": "goatapp",
+    "name": "EntregAgil",
+    "slug": "entregagil",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,10 +14,10 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.goatapp.goatapp"
+      "bundleIdentifier": "com.entregagil.entregagil"
     },
     "android": {
-      "package": "com.goatapp.goatapp",
+      "package": "com.entregagil.entregagil",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +25,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "63c59997-5b5c-4d96-bf6d-407e20c382ce"
+      }
     }
   }
 }
