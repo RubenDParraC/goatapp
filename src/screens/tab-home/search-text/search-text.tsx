@@ -31,21 +31,7 @@ const SearchText = () => {
   const [loadingSuggestions, setLoadingSuggestions] = useState<boolean>(true);
   const [storeData, setStoreData] = useState<StoreType[]>();
   const [loadingStoreData, setLoadingStoreData] = useState<boolean>(true);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const snapPoints = ["90%"];
-
-  const handlePresentModalPress = useCallback(() => {
-    if (bottomSheetModalRef.current) {
-      if (!isOpen) {
-        bottomSheetModalRef.current?.present();
-        setIsOpen(true);
-      } else {
-        bottomSheetModalRef.current.dismiss();
-        setIsOpen(false);
-      }
-    }
-  }, [isOpen]);
 
   // Signal for canceling network requests
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -72,8 +58,7 @@ const SearchText = () => {
   // Cerrar el BottomSheetModal al presionar el botón de volver
   useEffect(() => {
     const handleBackPress = () => {
-      if (isOpen && bottomSheetModalRef.current) {
-        bottomSheetModalRef.current.dismiss(); // Cierra el modal
+      if (isOpen) {
         setIsOpen(false);
         return true; // Evita la acción predeterminada del botón de volver
       }
@@ -94,7 +79,7 @@ const SearchText = () => {
           autoFocus
           onChangeText={(text) => setCurrentText(text)}
           autoCapitalize="none"
-          icon={
+          iconLeft={
             <IconComponent icon="Feather" name="search" color="gray_hard" />
           }
         />
@@ -115,7 +100,7 @@ const SearchText = () => {
                 setStoreData,
                 setLoadingStoreData,
               });
-              handlePresentModalPress();
+              setIsOpen(true);
             }}
           />
         )}
@@ -130,12 +115,7 @@ const SearchText = () => {
         keyExtractor={(_, index) => `suggestion-item-${+index}`}
         contentContainerStyle={{ paddingBottom: 150 }}
       />
-      <Modal
-        snapPoints={snapPoints}
-        bottomSheetModalRef={bottomSheetModalRef}
-        exteriorBackgorundColor="secondary"
-        setIsOpen={setIsOpen}
-      >
+      <Modal snapPoint={90} isOpen={isOpen} setIsOpen={setIsOpen}>
         <View className="w-full flex-1">
           <FlatList
             data={storeData}
@@ -159,6 +139,7 @@ const SearchText = () => {
               );
             }}
             keyExtractor={(item) => `store-${+item.id}`}
+            nestedScrollEnabled
           />
         </View>
       </Modal>

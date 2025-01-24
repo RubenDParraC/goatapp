@@ -25,6 +25,7 @@ export default function Login() {
   const { height } = useWindowDimensions();
   const { login } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isVisiblePass, setIsVisiblePass] = useState<boolean>(false);
   const [isError, setIsError] = useState<string>("");
 
   const handleLogin = ({ email, password }: ValuesType) => {
@@ -112,7 +113,7 @@ export default function Login() {
                   keyboardType="email-address"
                   error={touched.email && errors.email ? errors.email : ""}
                   hideSeparator
-                  icon={
+                  iconLeft={
                     <IconComponent
                       icon="MaterialIcons"
                       name="email"
@@ -133,7 +134,8 @@ export default function Login() {
                     touched.password && errors.password ? errors.password : ""
                   }
                   hideSeparator
-                  icon={
+                  secureTextEntry={!isVisiblePass}
+                  iconLeft={
                     <IconComponent
                       icon="MaterialCommunityIcons"
                       name="form-textbox-password"
@@ -142,6 +144,18 @@ export default function Login() {
                           ? "error"
                           : "gray_hard"
                       }
+                    />
+                  }
+                  iconRight={
+                    <IconComponent
+                      icon="MaterialCommunityIcons"
+                      name={!isVisiblePass ? "eye" : "eye-off"}
+                      color={
+                        touched.password && errors.password
+                          ? "error"
+                          : "gray_hard"
+                      }
+                      onClick={() => setIsVisiblePass(!isVisiblePass)}
                     />
                   }
                 />

@@ -1,4 +1,10 @@
-import { View, Text, Animated, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  Animated,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import type { DynamicHeaderProps } from "./types";
 import { ConstantClass } from "../../statics/config";
@@ -12,6 +18,7 @@ const DynamicHeader = ({
   subtitle,
   description,
   image,
+  onClick,
   isOpacityPercentInitial = 0.5,
 }: DynamicHeaderProps) => {
   const Scroll_Distance = HeaderMaxHeight - HeaderMinHeight;
@@ -61,43 +68,48 @@ const DynamicHeader = ({
         height: animatedHeaderHeight,
       }}
     >
-      <ImageBackground
-        source={{ uri: `${ConstantClass.webserviceName}${image}` }}
-        className="w-full h-full"
-      >
-        <Animated.View
-          className="w-full h-full flex items-center justify-center bg-black absolute"
-          style={{
-            opacity: animatedHeaderOpacity,
-          }}
-        />
-        <View className="w-full h-full flex items-center justify-center gap-2 z-10 absolute p-5 pt-10">
-          {title ? (
-            <Animated.Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={{ fontSize: animatedHeaderTitle }}
-              className="font-bold text-white text-center "
-            >
-              {title}
-            </Animated.Text>
-          ) : null}
-          {subtitle ? (
-            <Text numberOfLines={2} className="font-bold text-base text-white">
-              {subtitle}
-            </Text>
-          ) : null}
-          {description ? (
-            <Text
-              numberOfLines={numberOfLines}
-              ellipsizeMode="tail"
-              className="font-light text-md text-white text-center"
-            >
-              {description}
-            </Text>
-          ) : null}
-        </View>
-      </ImageBackground>
+      <TouchableOpacity activeOpacity={0.6} onPress={onClick}>
+        <ImageBackground
+          source={{ uri: `${ConstantClass.webserviceName}${image}` }}
+          className="w-full h-full"
+        >
+          <Animated.View
+            className="w-full h-full flex items-center justify-center bg-black absolute"
+            style={{
+              opacity: animatedHeaderOpacity,
+            }}
+          />
+          <View className="w-full h-full flex items-center justify-center gap-2 z-10 absolute p-5 pt-10">
+            {title ? (
+              <Animated.Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{ fontSize: animatedHeaderTitle }}
+                className="font-bold text-white text-center"
+              >
+                {title}
+              </Animated.Text>
+            ) : null}
+            {subtitle ? (
+              <Text
+                numberOfLines={2}
+                className="font-bold text-base text-white"
+              >
+                {subtitle}
+              </Text>
+            ) : null}
+            {description ? (
+              <Text
+                numberOfLines={numberOfLines}
+                ellipsizeMode="tail"
+                className="font-light text-md text-white text-center"
+              >
+                {description}
+              </Text>
+            ) : null}
+          </View>
+        </ImageBackground>
+      </TouchableOpacity>
     </Animated.View>
   );
 };

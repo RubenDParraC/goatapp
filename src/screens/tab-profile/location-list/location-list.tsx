@@ -1,5 +1,5 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BackHandler, FlatList, SafeAreaView, Text, View } from "react-native";
 import {
   deleteLocationRequest,
@@ -8,7 +8,6 @@ import {
 import type { LocationType } from "../../../statics/types-backend";
 import { useColorScheme } from "nativewind";
 import RenderLocationItem from "../../../components/list-item/render-location-item/render-location-item";
-import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import Modal from "../../../components/modal/modal";
 import Button from "../../../components/button/button";
 import IconComponent from "../../../components/icon-component/icon-component";
@@ -23,27 +22,12 @@ export default function LocationList() {
   const [loadingDeleteLocation, setLoadingDeleteLocation] =
     useState<boolean>(true);
   const [locationID, setLocationId] = useState<string>("");
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const snapPoints = ["25%"];
-
-  const handlePresentModalPress = useCallback(() => {
-    if (bottomSheetModalRef.current) {
-      if (!isOpen) {
-        bottomSheetModalRef.current?.present();
-        setIsOpen(true);
-      } else {
-        bottomSheetModalRef.current.dismiss();
-        setIsOpen(false);
-      }
-    }
-  }, [isOpen]);
 
   // Cerrar el BottomSheetModal al presionar el botón de volver
   useEffect(() => {
     const handleBackPress = () => {
-      if (isOpen && bottomSheetModalRef.current) {
-        bottomSheetModalRef.current.dismiss(); // Cierra el modal
+      if (isOpen) {
         setIsOpen(false);
         return true; // Evita la acción predeterminada del botón de volver
       }
@@ -86,7 +70,7 @@ export default function LocationList() {
               }
               onClickDelete={(locationId) => {
                 setLocationId(locationId);
-                handlePresentModalPress();
+                setIsOpen(!isOpen);
               }}
             />
           )}
@@ -115,20 +99,15 @@ export default function LocationList() {
           }
         />
       </Animated.View>
-      <Modal
-        snapPoints={snapPoints}
-        bottomSheetModalRef={bottomSheetModalRef}
-        exteriorBackgorundColor="error"
-        setIsOpen={setIsOpen}
-      >
+      <Modal snapPoint={25} isOpen={isOpen} setIsOpen={setIsOpen}>
         <View className="w-full flex-1 flex justify-between p-5">
           <Text className="text-xl font-semibold text-center">
             ¿Esta seguro que desea eliminar esta ubicación?
           </Text>
-          <View className="flex flex-row justify-between">
+          <View className="w-full flex flex-row justify-between gap-4">
             <Button
-              onClick={() => handlePresentModalPress()}
-              className="w-[42%]"
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex-1"
               iconLeft={
                 <IconComponent icon="AntDesign" name="close" color="white" />
               }
@@ -141,9 +120,9 @@ export default function LocationList() {
                 });
                 await locationsRequest({ setLocations, setLoadingLocations });
                 setLocationId("");
-                handlePresentModalPress();
+                setIsOpen(!isOpen);
               }}
-              className="w-[42%]"
+              className="flex-1"
               color="error"
               iconLeft={
                 <IconComponent icon="AntDesign" name="check" color="white" />

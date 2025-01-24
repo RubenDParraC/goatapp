@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   SafeAreaView,
   Text,
@@ -18,18 +18,16 @@ import Button from "../../../components/button/button";
 import Loader from "../../../components/loader/loader";
 import type { RegisterScreenNavigationProp, ValuesType } from "./types";
 import { registerRequest } from "../../../services/requests";
-import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Modal from "../../../components/modal/modal";
 
 export default function Register() {
   const navigation = useNavigation<RegisterScreenNavigationProp>();
   const { height } = useWindowDimensions();
+  const [isVisiblePass, setIsVisiblePass] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<string>("");
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const snapPoints = ["50%"];
 
   const handleRegister = async ({
     firstName,
@@ -59,19 +57,10 @@ export default function Register() {
   }, [navigation]);
 
   const handlePresentModalPress = useCallback(() => {
-    if (bottomSheetModalRef.current) {
-      if (!isOpen) {
-        bottomSheetModalRef.current?.present();
-        setIsOpen(true);
-      } else {
-        bottomSheetModalRef.current.dismiss();
-        setIsOpen(false);
-      }
-    }
+    setIsOpen(!isOpen);
   }, [isOpen]);
 
   useEffect(() => {
-    console.log(isOpen);
     const handleBackPress = () => {
       if (isOpen) {
         return true; // Bloquea el botón de volver
@@ -161,7 +150,7 @@ export default function Register() {
                         : ""
                     }
                     hideSeparator
-                    icon={
+                    iconLeft={
                       <IconComponent
                         icon="AntDesign"
                         name="user"
@@ -182,7 +171,7 @@ export default function Register() {
                       touched.lastName && errors.lastName ? errors.lastName : ""
                     }
                     hideSeparator
-                    icon={
+                    iconLeft={
                       <IconComponent
                         icon="AntDesign"
                         name="user"
@@ -202,7 +191,7 @@ export default function Register() {
                     keyboardType="email-address"
                     error={touched.email && errors.email ? errors.email : ""}
                     hideSeparator
-                    icon={
+                    iconLeft={
                       <IconComponent
                         icon="MaterialIcons"
                         name="email"
@@ -222,7 +211,7 @@ export default function Register() {
                     keyboardType="phone-pad"
                     error={touched.phone && errors.phone ? errors.phone : ""}
                     hideSeparator
-                    icon={
+                    iconLeft={
                       <IconComponent
                         icon="MaterialIcons"
                         name="phone-iphone"
@@ -243,7 +232,8 @@ export default function Register() {
                       touched.password && errors.password ? errors.password : ""
                     }
                     hideSeparator
-                    icon={
+                    secureTextEntry={!isVisiblePass}
+                    iconLeft={
                       <IconComponent
                         icon="MaterialCommunityIcons"
                         name="form-textbox-password"
@@ -252,6 +242,18 @@ export default function Register() {
                             ? "error"
                             : "gray_hard"
                         }
+                      />
+                    }
+                    iconRight={
+                      <IconComponent
+                        icon="MaterialCommunityIcons"
+                        name={!isVisiblePass ? "eye" : "eye-off"}
+                        color={
+                          touched.password && errors.password
+                            ? "error"
+                            : "gray_hard"
+                        }
+                        onClick={() => setIsVisiblePass(!isVisiblePass)}
                       />
                     }
                   />
@@ -268,7 +270,8 @@ export default function Register() {
                         : ""
                     }
                     hideSeparator
-                    icon={
+                    secureTextEntry={!isVisiblePass}
+                    iconLeft={
                       <IconComponent
                         icon="MaterialCommunityIcons"
                         name="form-textbox-password"
@@ -277,6 +280,18 @@ export default function Register() {
                             ? "error"
                             : "gray_hard"
                         }
+                      />
+                    }
+                    iconRight={
+                      <IconComponent
+                        icon="MaterialCommunityIcons"
+                        name={!isVisiblePass ? "eye" : "eye-off"}
+                        color={
+                          touched.password && errors.password
+                            ? "error"
+                            : "gray_hard"
+                        }
+                        onClick={() => setIsVisiblePass(!isVisiblePass)}
                       />
                     }
                   />
@@ -304,11 +319,10 @@ export default function Register() {
                 </View>
               </ScrollView>
               <Modal
-                snapPoints={snapPoints}
-                bottomSheetModalRef={bottomSheetModalRef}
-                enablePanDownToClose={false}
-                exteriorBackgorundColor="primary"
+                snapPoint={40}
+                isOpen={isOpen}
                 setIsOpen={setIsOpen}
+                enablePanDownToClose={false}
               >
                 <View className="w-full flex flex-1 flex-col items-center justify-center gap-5">
                   <IconComponent

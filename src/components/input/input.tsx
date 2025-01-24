@@ -8,8 +8,10 @@ const Input = ({
   placeholder,
   error,
   label,
-  icon,
+  iconLeft,
+  iconRight,
   hideSeparator = false,
+  secureTextEntry = false,
   autoFocus = false,
   classNameContainer,
   classNameInput,
@@ -22,7 +24,7 @@ const Input = ({
     <View className={`w-full flex flex-col gap-1 my-3 ${classNameContainer}`}>
       {label ? <Text className="text-gray_hard text-base">{label}</Text> : null}
       <View className="w-full flex flex-row items-center gap-1">
-        <View className="max-w-10">{icon ? icon : null}</View>
+        <View className="max-w-10">{iconLeft ? iconLeft : null}</View>
         <View className="flex-1">
           <TextInput
             placeholder={placeholder}
@@ -34,8 +36,10 @@ const Input = ({
             autoCapitalize={autoCapitalize}
             keyboardType={keyboardType}
             autoFocus={autoFocus}
+            secureTextEntry={secureTextEntry}
           />
         </View>
+        <View className="max-w-10">{iconRight ? iconRight : null}</View>
       </View>
       {hideSeparator ? (
         <Separator color={error ? "error" : "gray_hard"} />

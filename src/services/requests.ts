@@ -413,10 +413,14 @@ export const locationCreateRequest = async ({
       onNavigation();
     } else {
       console.log(response);
+      if (response.name[0]) {
+        setIsError(`${response.name[0]} (Nombre)`);
+      } else {
+        setIsError(
+          "Ocurrio un error al crear la ubicación, intentelo nuevamente."
+        );
+      }
       setIsLoading(false);
-      setIsError(
-        "Ocurrio un error al crear la ubicación, intentelo nuevamente."
-      );
     }
   } catch (error) {
     console.log(error);

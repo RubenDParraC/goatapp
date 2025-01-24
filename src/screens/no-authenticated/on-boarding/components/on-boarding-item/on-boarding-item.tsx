@@ -16,7 +16,10 @@ export default function OnBoardingItem({
       />
       <View style={[{ width }]} className="p-5 flex flex-col gap-5">
         <Text className="text-white font-bold text-2xl">{item.title}</Text>
-        <Text className="text-teritary text-justify text-base">
+        <Text
+          className="text-teritary text-justify text-base"
+          numberOfLines={6}
+        >
           {item.description}
         </Text>
       </View>

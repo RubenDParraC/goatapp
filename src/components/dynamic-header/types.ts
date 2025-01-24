@@ -10,4 +10,5 @@ export type DynamicHeaderProps = {
   description?: string;
   image?: string;
   isOpacityPercentInitial?: number;
+  onClick?: () => void;
 };

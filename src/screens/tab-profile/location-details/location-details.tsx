@@ -122,7 +122,7 @@ export default function LocationDetails() {
                   autoCapitalize="sentences"
                   error={touched.name && errors.name ? errors.name : ""}
                   hideSeparator
-                  icon={
+                  iconLeft={
                     <IconComponent
                       icon="MaterialIcons"
                       name="maps-home-work"
@@ -143,7 +143,7 @@ export default function LocationDetails() {
                     touched.address && errors.address ? errors.address : ""
                   }
                   hideSeparator
-                  icon={
+                  iconLeft={
                     <IconComponent
                       icon="MaterialIcons"
                       name="my-location"
@@ -168,7 +168,7 @@ export default function LocationDetails() {
                       : ""
                   }
                   hideSeparator
-                  icon={
+                  iconLeft={
                     <IconComponent
                       icon="MaterialCommunityIcons"
                       name="home-group"

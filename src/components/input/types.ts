@@ -12,7 +12,9 @@ export type InputProps = {
   error?: string;
   hideSeparator?: boolean;
   autoFocus?: boolean;
-  icon?: ReactNode;
+  secureTextEntry?: boolean;
+  iconLeft?: ReactNode;
+  iconRight?: ReactNode;
   classNameContainer?: string;
   classNameInput?: string;
   autoCapitalize?: "none" | "sentences" | "words" | "characters";

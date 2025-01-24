@@ -14,7 +14,7 @@ const RenderProductItem = ({
     <Product
       index={index}
       item={item}
-      onClick={onClick}
+      onClick={() => onClick(item.id)}
       onClickCartShop={onClickCartShop}
       isHorizontal={isHorizontal}
     />

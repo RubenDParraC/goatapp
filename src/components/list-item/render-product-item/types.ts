@@ -4,6 +4,6 @@ export type RenderProductItemProps = {
   index: number;
   item: ProductType;
   isHorizontal?: boolean;
-  onClick: () => void;
+  onClick: (productId: number | string) => void;
   onClickCartShop: () => void;
 };
